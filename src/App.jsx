@@ -1,6 +1,6 @@
-import React from 'react';
-import path from './utils/path';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import React from "react";
+import path from "./utils/path";
+import { Navigate, Route, Routes } from "react-router-dom";
 import {
   ClassList,
   Login,
@@ -24,29 +24,44 @@ import {
   TopicManager,
   Schedule,
   ListNotification,
-  Progress
-} from './components/index';
-import { PublicLayout, PublicAdmin, PublicHome, PublicAboutUs, PublicStudent, PublicMentor } from './pages/index';
-import { ToastContainer } from 'react-toastify';
-import PrivateRoute from '../src/middlewares/PrivateRoute';
-import GuestRoute from '../src/middlewares/GuestRoute';
-import { useEffect } from 'react';
-import { roleForComponent } from './utils/constant';
-import { Meeting } from './components/common/Meeting';
-import { useUserStore } from './store/useUserStore';
+  Progress,
+} from "./components/index";
+import {
+  PublicLayout,
+  PublicAdmin,
+  PublicHome,
+  PublicAboutUs,
+  PublicStudent,
+  PublicMentor,
+} from "./pages/index";
+import { ToastContainer } from "react-toastify";
+import PrivateRoute from "../src/middlewares/PrivateRoute";
+import GuestRoute from "../src/middlewares/GuestRoute";
+import { useEffect } from "react";
+import { roleForComponent } from "./utils/constant";
+import { Meeting } from "./components/common/Meeting";
+import { useUserStore } from "./store/useUserStore";
 
 function App() {
   const { token, role, resetUserStore } = useUserStore();
-  useEffect(() => {
-    if (!localStorage?.getItem('token') || localStorage?.getItem('token') === 'null') resetUserStore();
-  }, []);
+  // useEffect(() => {
+  //   if (!localStorage?.getItem('token') || localStorage?.getItem('token') === 'null') resetUserStore();
+  // }, []);
 
   return (
     <div>
       <ToastContainer position="top-right" autoClose={1000} limit={3} />
       <Routes>
         {/* {!token && <Route path="/" element={<PublicHome />} />} */}
-        <Route path="/" element={<Navigate to={!token ? path.PUBLIC : roleForComponent[role]} replace />} />
+        <Route
+          path="/"
+          element={
+            <Navigate
+              to={!token ? path.PUBLIC : roleForComponent[role]}
+              replace
+            />
+          }
+        />
 
         {/* Route cho trang public */}
         <Route path={path.PUBLIC} element={<PublicLayout />}>
@@ -73,14 +88,29 @@ function App() {
           <Route path={path.USER_VIEW_CLASS} element={<ClassList />} />
           <Route path={path.USER_BOOKING} element={<BookingList />} />
           <Route path={path.STUDENT_GROUP} element={<StudentGroup />} />
-          <Route path={`${path.STUDENT_GROUP}/${path.USER_PROFILE_NAME_ID}`} element={<UserProfile />} />
-          <Route path={path.USER_LIST_NOTIFICATION} element={<ListNotification />} />
-          <Route path={`${path.USER_VIEW_CLASS}/${path.USER_PROFILE_NAME_ID}`} element={<UserProfile />} />
-          <Route path={`${path.USER_VIEW_MENTOR}/${path.USER_PROFILE_NAME_ID}`} element={<UserProfile />} />
+          <Route
+            path={`${path.STUDENT_GROUP}/${path.USER_PROFILE_NAME_ID}`}
+            element={<UserProfile />}
+          />
+          <Route
+            path={path.USER_LIST_NOTIFICATION}
+            element={<ListNotification />}
+          />
+          <Route
+            path={`${path.USER_VIEW_CLASS}/${path.USER_PROFILE_NAME_ID}`}
+            element={<UserProfile />}
+          />
+          <Route
+            path={`${path.USER_VIEW_MENTOR}/${path.USER_PROFILE_NAME_ID}`}
+            element={<UserProfile />}
+          />
           <Route path={path.USER_PROFILE_NAME_ID} element={<UserProfile />} />
           <Route path={path.USER_PROFILE_ALL} element={<UserProfile />} />
           <Route path={path.STUDENT_PROGRESS} element={<Progress />} />
-          <Route path={path.STUDENT_HISTORY_POINT} element={<ListHistoryPoint />} />
+          <Route
+            path={path.STUDENT_HISTORY_POINT}
+            element={<ListHistoryPoint />}
+          />
         </Route>
 
         {/* Route cho trang mentor */}
@@ -95,13 +125,25 @@ function App() {
           <Route index element={<UserHome />} />
           <Route path={path.USER_VIEW_CLASS} element={<ClassList />} />
           <Route path={path.LIST_GROUP} element={<ListGroup />} />
-          <Route path={`${path.LIST_GROUP}/${path.USER_PROFILE_NAME_ID}`} element={<UserProfile />} />
+          <Route
+            path={`${path.LIST_GROUP}/${path.USER_PROFILE_NAME_ID}`}
+            element={<UserProfile />}
+          />
           <Route path={path.USER_VIEW_MENTOR} element={<MentorList />} />
           <Route path={path.MENTOR_SCHEDULE} element={<Schedule />} />
           <Route path={path.USER_PROFILE_ALL} element={<UserProfile />} />
-          <Route path={path.USER_LIST_NOTIFICATION} element={<ListNotification />} />
-          <Route path={`${path.USER_VIEW_CLASS}/${path.USER_PROFILE_NAME_ID}`} element={<UserProfile />} />
-          <Route path={`${path.USER_VIEW_MENTOR}/${path.USER_PROFILE_NAME_ID}`} element={<UserProfile />} />
+          <Route
+            path={path.USER_LIST_NOTIFICATION}
+            element={<ListNotification />}
+          />
+          <Route
+            path={`${path.USER_VIEW_CLASS}/${path.USER_PROFILE_NAME_ID}`}
+            element={<UserProfile />}
+          />
+          <Route
+            path={`${path.USER_VIEW_MENTOR}/${path.USER_PROFILE_NAME_ID}`}
+            element={<UserProfile />}
+          />
           <Route path={path.USER_BOOKING} element={<BookingList />} />
         </Route>
         <Route path="*" element={<Navigate to={path.PUBLIC} replace />} />
@@ -117,10 +159,16 @@ function App() {
         >
           <Route index element={<AdminHome />} />
           <Route path={path.USER_PROFILE} element={<UserProfile />} />
-          <Route path={path.ADMIN_STUDENT_MANAGER} element={<StudentManager />} />
+          <Route
+            path={path.ADMIN_STUDENT_MANAGER}
+            element={<StudentManager />}
+          />
           <Route path={path.ADMIN_MENTOR_MANAGER} element={<MentorManager />} />
           <Route path={path.ADMIN_SKILL_MANAGER} element={<SkillManager />} />
-          <Route path={path.ADMIN_SEMESTER_MANAGER} element={<SemesterManager />} />
+          <Route
+            path={path.ADMIN_SEMESTER_MANAGER}
+            element={<SemesterManager />}
+          />
           <Route path={path.ADMIN_CLASS_MANAGER} element={<ClassManager />} />
           <Route path={path.ADMIN_TOPIC_MANAGER} element={<TopicManager />} />
         </Route>

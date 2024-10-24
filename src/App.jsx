@@ -44,9 +44,13 @@ import { useUserStore } from "./store/useUserStore";
 
 function App() {
   const { token, role, resetUserStore } = useUserStore();
-  // useEffect(() => {
-  //   if (!localStorage?.getItem('token') || localStorage?.getItem('token') === 'null') resetUserStore();
-  // }, []);
+  useEffect(() => {
+    if (
+      !localStorage?.getItem("token") ||
+      localStorage?.getItem("token") === "null"
+    )
+      resetUserStore();
+  }, []);
 
   return (
     <div>
